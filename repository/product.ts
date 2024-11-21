@@ -10,3 +10,7 @@ export async function getProducts (params?: Record<string, unknown>): ApiRespons
 export async function getProduct (id: number | string): ApiResponse<Product> {
   return await api(getPath('pathGetProduct', { id }), { method: 'GET' })
 }
+
+export async function getProductOperatingSystems (): ApiResponse<ProductOperatingSystem[]> {
+  return await api(getPath('pathGetOs'))
+}

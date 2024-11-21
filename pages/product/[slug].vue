@@ -109,8 +109,6 @@ const route     = useRoute()
 const { slug }  = useRoute().params
 
 const { data } = useFetch<Product>(`/api/products/${(slug as string ?? '').split('--').at(0)}`)
-if (data.value)
-  product.value = data.value
 
 const randomPrice = computed<string>(() => {
   const decimal1 = Math.floor(Math.random() * (100 - 50 + 1) + 50)
