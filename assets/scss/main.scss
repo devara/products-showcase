@@ -1,0 +1,36 @@
+@use 'abstracts' as abs;
+@use 'base';
+@use 'components';
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..700;1,100..700&display=swap');
+
+*, *::after, *::before{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html{
+  @include abs.fontSize(base);
+  /* reduce base fontsize for mobile*/
+  @media(max-width: 767px){
+    @include abs.fontSize(sm);
+  }
+
+  body {
+    font-family: 'Raleway', sans-serif;
+  }
+}
+
+.h {
+  &-full {
+    height: 100%;
+  }
+
+  &-screen {
+    height: 100vh;
+  }
+
+  &-auto {
+    height: auto;
+  }
+}

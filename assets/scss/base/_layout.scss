@@ -1,0 +1,26 @@
+@use 'sass:map';
+@use '../abstracts' as *;
+
+@each $display in $displayProperties {
+  .#{$css-class-prefix}#{$display} {
+    display: #{$display};
+  }
+}
+
+@each $widthName, $widthValue in $widthVariants {
+  .#{$css-class-prefix}w-#{$widthName} {
+    width: $widthValue;
+  }
+}
+
+@each $justify, $justifyValue in $justifyVariants {
+  .#{$css-class-prefix}justify-#{$justify} {
+    @include justifyContent($justify)
+  }
+}
+
+@each $align, $alignValue in $alignmentVariants {
+  .#{$css-class-prefix}items-#{$align} {
+    @include alignItems($align)
+  }
+}

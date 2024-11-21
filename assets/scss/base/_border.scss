@@ -1,0 +1,16 @@
+@use 'sass:map';
+@use '../abstracts' as *;
+
+.#{$css-class-prefix}rounded {
+  border-radius: $rounded-base;
+}
+
+@each $roundedName, $roundedValue in $roundedVariants {
+  .#{$css-class-prefix}rounded-#{$roundedName} {
+    @include borderRadius($roundedName)
+  }
+}
+
+.#{$css-class-prefix}border {
+  @include colorUtilities(border-color)
+}
