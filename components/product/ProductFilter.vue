@@ -82,17 +82,13 @@
 </template>
 
 <script lang="ts" setup>
+import { getProductOperatingSystems } from '~/repository/product'
+
 const {
   productOsVariants,
   productMinRating,
   productFilters,
-  productQueryParams,
 } = storeToRefs(useProductStore())
-
-const { data } = useFetch<ProductOperatingSystem[]>('/api/os')
-
-if (data.value)
-  productOsVariants.value = data.value
 
 const toggles = reactive({
   os    : true,
@@ -113,7 +109,13 @@ function clearAllFilter () {
   productFilters.value.brand = []
 }
 
-watch(productQueryParams, () => {
-  // console.log(value)
+onMounted(async () => {
+  try {
+    const responses = await getProductOperatingSystems()
+    if (responses)
+      productOsVariants.value = responses
+  } catch (error) {
+    console.error(error)
+  }
 })
 </script>
