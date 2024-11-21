@@ -6,7 +6,7 @@
   @include elementDisplay(flex);
 
   img {
-    width: auto;
+    width: 80%;
     height: auto;
     @include elementSpacing(margin, x);
   }
@@ -34,13 +34,25 @@
 .product-img-thumbnails {
   @include elementDisplay(flex);
   @include justifyContent(center);
+  @include alignItems(center);
   gap: 1rem;
   @include elementSpacing(margin, t, 6);
 
   &__item {
-    width: auto;
-    height: 115px;
     cursor: pointer;
+    border: 1px solid $gray-base;
+    @include borderRadius(lg);
+    @include elementSpacing(padding, x, 2);
+    @include elementSpacing(padding, y, 2);
+
+    img {
+      width: auto;
+      height: 115px;
+    }
+
+    &--active {
+      border: 2px solid $blue-base;
+    }
   }
 }
 

@@ -21,12 +21,17 @@
       </button>
     </div>
     <div class="product-img-thumbnails">
-      <img
+      <div
         v-for="(item, i) in productImages"
         :key="i"
-        :src="item"
         class="product-img-thumbnails__item"
-        @click="setActiveSlider(i)">
+        :class="{
+          'product-img-thumbnails__item--active': activeSlider === i
+        }">
+        <img
+          :src="item"
+          @click="setActiveSlider(i)">
+      </div>
     </div>
   </div>
 </template>

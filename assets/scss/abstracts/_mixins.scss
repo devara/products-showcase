@@ -26,6 +26,10 @@
   display: $value;
 }
 
+@mixin flexDirection($value) {
+  flex-direction: $value;
+}
+
 @mixin elementSpacing($property: 'margin', $side: '', $value: auto) {
   $propertyValue: map.get($spacings, $value);
 
