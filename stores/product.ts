@@ -1,4 +1,5 @@
 import { acceptHMRUpdate } from 'pinia'
+import { getProducts } from '~/repository/product'
 
 export const useProductStore = defineStore('product-store', () => {
   const products = ref<Product[]>([])
@@ -25,6 +26,12 @@ export const useProductStore = defineStore('product-store', () => {
     }
   })
 
+  async function getProductList () {
+    const responses = await getProducts(productQueryParams.value)
+
+    products.value = responses ?? []
+  }
+
   return {
     products,
     productsPagination,
@@ -33,6 +40,7 @@ export const useProductStore = defineStore('product-store', () => {
     productOsVariants,
     productFilters,
     productQueryParams,
+    getProductList,
   }
 })
 

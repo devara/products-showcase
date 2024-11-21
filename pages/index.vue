@@ -21,24 +21,26 @@
 </template>
 
 <script lang="ts" setup>
-import { getProducts } from '~/repository/product'
-
 const {
   products,
   productSearchQuery,
+  productQueryParams,
 } = storeToRefs(useProductStore())
+const { getProductList } = useProductStore()
 
-async function getProductList () {
+async function getList () {
   try {
-    const responses = await getProducts()
-
-    products.value = responses ?? []
+    await getProductList()
   } catch (error) {
     console.error(error)
   }
 }
 
+watch(productQueryParams, async () => {
+  await getList()
+}, { deep: true })
+
 onMounted(async () => {
-  await getProductList()
+  await getList()
 })
 </script>

@@ -2,6 +2,6 @@
   <div class="site">
     <NavigationHeader />
     <slot />
-    <NavigationFooter />
+    <NavigationFooter class="dev-mt-auto" />
   </div>
 </template>

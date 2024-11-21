@@ -21,6 +21,12 @@ html{
   }
 }
 
+.site {
+  min-height: 100vh;
+  @include abs.elementDisplay(flex);
+  flex-direction: column;
+}
+
 .h {
   &-full {
     height: 100%;

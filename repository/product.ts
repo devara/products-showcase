@@ -7,6 +7,6 @@ export async function getProducts (params?: Record<string, unknown>): ApiRespons
   })
 }
 
-export async function getProduct (id: number): ApiResponse<Product> {
+export async function getProduct (id: number | string): ApiResponse<Product> {
   return await api(getPath('pathGetProduct', { id }), { method: 'GET' })
 }
