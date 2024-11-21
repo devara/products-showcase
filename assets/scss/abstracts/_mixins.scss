@@ -55,3 +55,22 @@
 @mixin alignItems($alias) {
   align-items: map.get($alignmentVariants, $alias);
 }
+
+@mixin displayNone() {
+  display: none;
+}
+
+@mixin displayFull($property: '') {
+  @if $property=='w' {
+    width: 100%;
+  }
+
+  @if $property=='h' {
+    height: 100%;
+  }
+}
+
+@mixin squareSize($value) {
+  width: $value;
+  height: $value;
+}

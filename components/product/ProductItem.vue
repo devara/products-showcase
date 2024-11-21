@@ -14,7 +14,7 @@
 
     <div class="product__action">
       <button
-        class="dev-bg-blue-dark dev-text-white"
+        class="dev-bg-green-base dev-text-white"
         @click.stop="addToCart">
         Add cart
       </button>

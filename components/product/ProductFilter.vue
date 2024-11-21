@@ -3,7 +3,7 @@
     <div class="dev-flex dev-items-center dev-justify-between dev-px-2">
       <span class="dev-font-semibold">Filters</span>
       <button
-        class="dev-px-3 dev-py-2 dev-rounded-full"
+        class="product-filter__clear"
         @click="clearAllFilter">
         Clear all
       </button>
@@ -110,6 +110,9 @@ function clearAllFilter () {
 }
 
 onMounted(async () => {
+  if (productOsVariants.value.length > 0)
+    return
+
   try {
     const responses = await getProductOperatingSystems()
     if (responses)

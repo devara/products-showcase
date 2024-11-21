@@ -1,17 +1,86 @@
 @use '../abstracts' as *;
 @use './button' as btn;
 
-.products-container {
+.products-list {
   @include elementDisplay(flex);
   gap: 1rem;
   @include elementSpacing(padding, y, 4);
   @include elementSpacing(padding, x, 6);
+
+  &__filter {
+    display: none !important;
+
+    @include mq(md) {
+      display: flex !important;
+      width: 40%;
+    }
+
+    @include mq(lg) {
+      width: 25%;
+    }
+  }
+
+  &__items {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    flex-grow: 1;
+  }
 }
 
-.product-list {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.product-filter-mobile-toggle {
+  position: sticky;
+  top: 10px;
+  z-index: 20;
+  @include elementDisplay(flex);
+  @include elementSpacing(padding, x, 3);
+  @include elementSpacing(padding, y, 2);
+
+  button {
+    width: 100%;
+    color: $white;
+    border: none;
+    cursor: pointer;
+    @include fontSize(base);
+    @include backgroundColor($green-base);
+    @include elementSpacing(padding, x, 3);
+    @include elementSpacing(padding, y, 2);
+    @include borderRadius(lg);
+  }
+
+  @include mq(md) {
+    @include displayNone();
+  }
+}
+
+.product-filter-mobile-menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1050;
+  width: 100%;
+  height: 100%;
+  background-color: #1f23294d;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  .dialog {
+    min-height: calc(100% - 4rem);
+    @include elementDisplay(flex);
+    @include alignItems(center);
+    @include justifyContent(center);
+    @include elementSpacing(margin, y, 8);
+
+    .product-filter {
+      position: relative;
+      @include backgroundColor($white);
+      min-width: 350px;
+    }
+  }
+
+  @include mq(md) {
+    @include displayNone();
+  }
 }
 
 .product {
@@ -21,8 +90,9 @@
   min-height: 200px;
   border: 1px solid $gray-light;
   @include elementDisplay(flex);
-  flex-direction: column;
+  @include flexDirection(column);
   gap: 1rem;
+  justify-self: center;
   @include borderRadius(xl);
   @include elementSpacing(padding, x, 6);
   @include elementSpacing(padding, y, 6);
@@ -62,7 +132,7 @@
 
   &:hover {
     .product__sold-out {
-      display: none;
+      @include displayNone();
     }
   }
 }
@@ -71,10 +141,16 @@
   display: inline-flex;
   gap: 1rem;
   @include alignItems(center);
+  @include fontSize(sm);
 
   &__stars {
     display: inline-flex;
     gap: 0.25rem;
+
+    &__star {
+      width: 15px;
+      height: auto;
+    }
   }
 }
 
@@ -83,10 +159,19 @@
   flex-direction: column;
   gap: 1rem;
   border: 1px solid $gray-dark;
-  @include borderRadius(sm);
+  @include borderRadius(lg);
   height: fit-content;
   @include elementSpacing(padding, y, 3);
   @include elementSpacing(padding, x, 4);
+
+  &__clear {
+    @include elementSpacing(padding, x, 3);
+    @include elementSpacing(padding, y, 2);
+    @include borderRadius(full);
+    border: 1px solid $gray-dark;
+    background-color: transparent;
+    cursor: pointer;
+  }
 
   &__toggle {
     @include btn.toggleButton();
@@ -95,7 +180,7 @@
   &__items {
     flex-direction: column;
     gap: 0.5rem;
-    display: none;
+    @include displayNone();
 
     &--active {
       @include elementDisplay(flex);
@@ -125,7 +210,7 @@
     grid-template-columns: repeat(1, minmax(0, 1fr));
     gap: 1.5rem;
 
-    @media only screen and (min-width: 768px) {
+    @include mq(md) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -136,7 +221,8 @@
 
     &__attributes {
       @include elementDisplay(flex);
-      flex-direction: column;
+      @include flexDirection(column);
+      @include elementSpacing(padding, x, 3);
 
       &--item {
         @include elementSpacing(padding, y, 8);
@@ -147,16 +233,35 @@
         display: flex;
         flex-direction: column;
 
+        h2 {
+          @include fontSize(2xl);
+        }
+
         span {
           color: $gray-dark;
           text-transform: capitalize;
         }
       }
 
-      .price {
-        font-size: $text-3xl;
+      .discount-price {
+        @include fontSize(xl);
         @include fontWeight(700);
-        color: $blue-dark;
+        color: $green-base;
+
+        @include mq(lg) {
+          @include fontSize(3xl);
+        }
+      }
+
+      .base-price {
+        @include fontSize(lg);
+        @include fontWeight(500);
+        color: $gray-base;
+        text-decoration: line-through;
+
+        @include mq(lg) {
+          @include fontSize(xl);
+        }
       }
 
       .actions {
@@ -165,10 +270,10 @@
 
         &__quantity {
           @include elementDisplay(flex);
-          padding: 0.75rem;
+          padding: 0.5rem;
           @include borderRadius(full);
           @include backgroundColor($gray-light);
-          color: $blue-dark;
+          color: $green-base;
 
           input[type='number'] {
             border: none;
@@ -186,24 +291,46 @@
           }
 
           button {
-            @include fontSize(lg);
+            @include fontSize(sm);
             border: none;
             padding: 0.75rem;
             cursor: pointer;
           }
+
+          @include mq(lg) {
+            padding: 0.75rem;
+
+            button {
+              @include fontSize(lg);
+            }
+          }
         }
 
         &__cart {
-          min-width: 225px;
+          min-width: 175px;
           cursor: pointer;
           @include borderRadius(full);
           @include elementSpacing(padding, x, 6);
           @include elementSpacing(padding, y, 3);
-          @include backgroundColor($blue-dark);
+          @include backgroundColor($green-base);
           color: $white;
           @include fontSize(base);
           @include fontWeight($font-semibold);
           border: 0;
+
+          @include mq(lg) {
+            min-width: 225px;
+          }
+        }
+      }
+
+      @include mq(lg) {
+        .product-rating {
+          @include fontSize(base);
+
+          &__stars__star {
+            width: 20px;
+          }
         }
       }
     }

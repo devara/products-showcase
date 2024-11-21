@@ -7,17 +7,18 @@
     </h1>
     <div class="dev-header__search">
       <input
-        v-model="productSearchQuery"
+        v-model="searchQuery"
         type="text"
-        @keyup.enter="onEnterSearch">
+        @keyup.enter="onEnterSearch(searchQuery)">
     </div>
   </nav>
 </template>
 
 <script lang="ts" setup>
 const { productSearchQuery } = storeToRefs(useProductStore())
+const searchQuery            = ref<string>()
 
-async function onEnterSearch () {
-  // console.log(productSearchQuery.value)
+async function onEnterSearch (value?: string) {
+  productSearchQuery.value = value
 }
 </script>

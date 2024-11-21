@@ -1,7 +1,5 @@
 @use '../abstracts/variables' as *;
 
-// .#{$css-class-prefix}m
-
 @each $marginAlias, $marginName in $spacingSides {
   @each $space, $spaceValue in $spacings {
     .#{$css-class-prefix}m#{$marginAlias}-#{$space} {
