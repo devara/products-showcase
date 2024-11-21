@@ -1,0 +1,76 @@
+@use '../abstracts' as *;
+
+.product-img-slider {
+  position: relative;
+  overflow: hidden;
+  @include elementDisplay(flex);
+
+  img {
+    width: 80%;
+    height: auto;
+    @include elementSpacing(margin, x);
+  }
+
+  &__prev, &__next {
+    cursor: pointer;
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    @include borderRadius(full);
+    @include elementSpacing(padding, x, 2);
+    @include elementSpacing(padding, y, 2);
+  }
+
+  &__prev {
+    left: 0;
+  }
+
+  &__next {
+    right: 0;
+  }
+}
+
+.product-img-thumbnails {
+  @include elementDisplay(flex);
+  @include justifyContent(center);
+  @include alignItems(center);
+  gap: 1rem;
+  @include elementSpacing(margin, t, 6);
+
+  &__item {
+    cursor: pointer;
+    border: 1px solid $gray-base;
+    @include borderRadius(lg);
+    @include elementSpacing(padding, x, 2);
+    @include elementSpacing(padding, y, 2);
+
+    img {
+      width: auto;
+      height: 115px;
+    }
+
+    &--active {
+      border: 2px solid $blue-base;
+    }
+  }
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.slide-left-enter-from,
+.slide-right-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.slide-left-leave-to,
+.slide-right-enter-from {
+  transform: translateX(-100%);
+  opacity: 0;
+}

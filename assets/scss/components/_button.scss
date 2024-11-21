@@ -1,0 +1,22 @@
+@use '../abstracts' as *;
+
+@mixin baseButton() {
+  @include borderRadius(lg);
+  @include elementSpacing(padding, x, 3);
+  @include elementSpacing(padding, y, 2);
+  cursor: pointer;
+}
+
+@mixin toggleButton() {
+  @include elementDisplay(flex);
+  @include justifyContent(between);
+  @include elementSpacing(padding, x, 2);
+  @include elementSpacing(padding, y, 2);
+  cursor: pointer;
+}
+
+@mixin colorSelectorButton () {
+  @include borderRadius(full);
+  width: 50px;
+  height: 50px;
+}

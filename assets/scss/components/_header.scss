@@ -1,0 +1,22 @@
+@use '../abstracts' as *;
+
+.#{$css-class-prefix}header {
+  height: 90px;
+  @include elementDisplay(flex);
+  @include alignItems(center);
+  @include justifyContent(between);
+  @include elementSpacing(padding, x, 4);
+
+  &__logo {
+    color: $blue-dark;
+    cursor: pointer;
+  }
+
+  &__search {
+    input {
+      @include borderRadius(md);
+      @include elementSpacing(padding, x, 3);
+      @include elementSpacing(padding, y, 2);
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@use 'sass:map';
+@use '../abstracts' as *;
+
+@each $text, $value in $textSizes {
+  .#{$css-class-prefix}text-#{$text} {
+    @include fontSize($text)
+  }
+}
+
+@each $textAlign in $textAlignments {
+  .#{$css-class-prefix}text-#{$textAlign} {
+    @include textAlign($textAlign)
+  }
+}
+
+@each $fontWeight, $weightValue in $fontWeights {
+  .#{$css-class-prefix}font-#{$fontWeight} {
+    @include fontWeight($weightValue)
+  }
+}
+
+@each $breakName, $breakValue in $breakpoints {
+  @include mq($breakName) {
+    @each $text, $value in $textSizes {
+      .#{$breakName}\:#{$css-class-prefix}text-#{$text} {
+        @include fontSize($text)
+      }
+    }
+
+    @each $textAlign in $textAlignments {
+      .#{$breakName}\:#{$css-class-prefix}text-#{$textAlign} {
+        @include textAlign($textAlign)
+      }
+    }
+  }
+}

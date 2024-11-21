@@ -1,0 +1,226 @@
+@use '../abstracts' as *;
+@use './button' as btn;
+
+.products-container {
+  @include elementDisplay(flex);
+  gap: 1rem;
+  @include elementSpacing(padding, y, 4);
+  @include elementSpacing(padding, x, 6);
+}
+
+.product-list {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.product {
+  position: relative;
+  cursor: pointer;
+  width: 300px;
+  min-height: 200px;
+  border: 1px solid $gray-light;
+  @include elementDisplay(flex);
+  flex-direction: column;
+  gap: 1rem;
+  @include borderRadius(xl);
+  @include elementSpacing(padding, x, 6);
+  @include elementSpacing(padding, y, 6);
+
+  &__image {
+    height: 300px;
+    width: auto;
+  }
+
+  &__title {
+    @include elementDisplay(inline-block);
+  }
+
+  &__action {
+    @include elementDisplay(flex);
+    @include justifyContent(between);
+
+    button {
+      @include btn.baseButton();
+      @include borderRadius(full);
+      min-width: 100px;
+    }
+  }
+
+  &__sold-out {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba($gray-base, 0.7);
+    opacity: 70;
+    @include elementDisplay(flex);
+    flex-direction: column;
+    @include borderRadius(xl);
+  }
+
+  &:hover {
+    .product__sold-out {
+      display: none;
+    }
+  }
+}
+
+.product-rating {
+  display: inline-flex;
+  gap: 1rem;
+  @include alignItems(center);
+
+  &__stars {
+    display: inline-flex;
+    gap: 0.25rem;
+  }
+}
+
+.product-filter {
+  @include elementDisplay(flex);
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid $gray-dark;
+  @include borderRadius(sm);
+  height: fit-content;
+  @include elementSpacing(padding, y, 3);
+  @include elementSpacing(padding, x, 4);
+
+  &__toggle {
+    @include btn.toggleButton();
+  }
+
+  &__items {
+    flex-direction: column;
+    gap: 0.5rem;
+    display: none;
+
+    &--active {
+      @include elementDisplay(flex);
+    }
+  }
+
+  &__item {
+    @include elementDisplay(inline-flex);
+    @include alignItems(center);
+    gap: 0.5rem;
+    cursor: pointer;
+
+    input {
+      cursor: pointer;
+    }
+  }
+}
+
+.product-detail {
+  @include elementDisplay(flex);
+  flex-direction: column;
+  @include elementSpacing(padding, x, 6);
+  @include elementSpacing(padding, y, 6);
+
+  &__display {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+
+    @media only screen and (min-width: 768px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    &__view {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__attributes {
+      @include elementDisplay(flex);
+      flex-direction: column;
+
+      &--item {
+        @include elementSpacing(padding, y, 8);
+        border-bottom: 1px solid $gray-base;
+      }
+
+      .title {
+        display: flex;
+        flex-direction: column;
+
+        span {
+          color: $gray-dark;
+          text-transform: capitalize;
+        }
+      }
+
+      .price {
+        font-size: $text-3xl;
+        @include fontWeight(700);
+        color: $blue-dark;
+      }
+
+      .actions {
+        @include elementDisplay(flex);
+        gap: 1.5rem;
+
+        &__quantity {
+          @include elementDisplay(flex);
+          padding: 0.75rem;
+          @include borderRadius(full);
+          @include backgroundColor($gray-light);
+          color: $blue-dark;
+
+          input[type='number'] {
+            border: none;
+            outline: none;
+            pointer-events: none;
+            width: 3rem;
+            background-color: transparent;
+            @include textAlign(center);
+            @include fontSize(lg);
+            @include fontWeight($font-bold);
+
+            &::-webkit-inner-spin-button {
+              appearance: none;
+            }
+          }
+
+          button {
+            @include fontSize(lg);
+            border: none;
+            padding: 0.75rem;
+            cursor: pointer;
+          }
+        }
+
+        &__cart {
+          min-width: 225px;
+          cursor: pointer;
+          @include borderRadius(full);
+          @include elementSpacing(padding, x, 6);
+          @include elementSpacing(padding, y, 3);
+          @include backgroundColor($blue-dark);
+          color: $white;
+          @include fontSize(base);
+          @include fontWeight($font-semibold);
+          border: 0;
+        }
+      }
+    }
+  }
+
+  &__description {
+    margin-top: 4rem;
+  }
+}
+
+.product-colors {
+  @include elementDisplay(flex);
+  gap: 1rem;
+
+  &__selector {
+    @include btn.colorSelectorButton();
+    border: 0;
+    cursor: pointer;
+  }
+}

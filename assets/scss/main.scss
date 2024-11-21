@@ -1,0 +1,42 @@
+@use 'abstracts' as abs;
+@use 'base';
+@use 'components';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+*, *::after, *::before{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html{
+  @include abs.fontSize(base);
+  /* reduce base fontsize for mobile*/
+  @media(max-width: 767px){
+    @include abs.fontSize(sm);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+.site {
+  min-height: 100vh;
+  @include abs.elementDisplay(flex);
+  flex-direction: column;
+}
+
+.h {
+  &-full {
+    height: 100%;
+  }
+
+  &-screen {
+    height: 100vh;
+  }
+
+  &-auto {
+    height: auto;
+  }
+}

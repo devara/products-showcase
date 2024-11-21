@@ -1,0 +1,76 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+$white: #FFFFFF;
+$black: #000000;
+$green-light: #A5D6A7;
+$green-base: #4CAF50;
+$green-dark: #2E7D32;
+$green-bold: #1B5E20;
+$gray-light: #EEEEEE;
+$gray-base: #9E9E9E;
+$gray-dark: #424242;
+$gray-bold: #212121;
+$blue-light: #90CAF9;
+$blue-base: #2196F3;
+$blue-dark: #1565C0;
+$blue-bold: #0D47A1;
+$red-light: #EF9A9A;
+$red-base: #F44336;
+$red-dark: #C62828;
+$red-bold: #B71C1C;
+$yellow-light: #FFF59D;
+$yellow-base: #FFEB3B;
+$yellow-dark: #F9A825;
+$yellow-bold: #F57F17;
+$orange-light: #FFCC80;
+$orange-base: #FF9800;
+$orange-dark: #EF6C00;
+$orange-bold: #E65100;
+
+$colors-map: (
+  white: $white,
+  black: $black,
+  green-light: $green-light,
+  green-base: $green-base,
+  green-dark: $green-dark,
+  green-bold: $green-bold,
+  gray-light: $gray-light,
+  gray-base: $gray-base,
+  gray-dark: $gray-dark,
+  gray-bold: $gray-bold,
+  blue-light: $blue-light,
+  blue-base: $blue-base,
+  blue-dark: $blue-dark,
+  blue-bold: $blue-bold,
+  red-light: $red-light,
+  red-base: $red-base,
+  red-dark: $red-dark,
+  red-bold: $red-bold,
+  yellow-light: $yellow-light,
+  yellow-base: $yellow-base,
+  yellow-dark: $yellow-dark,
+  yellow-bold: $yellow-bold,
+  orange-light: $orange-light,
+  orange-base: $orange-base,
+  orange-dark: $orange-dark,
+  orange-bold: $orange-bold,
+);
+
+@mixin colorUtilities($property: 'color', $colorVariants: $colors-map) {
+
+  @each $name, $hex in $colorVariants {
+
+    &-#{$name} {
+      #{$property}: $hex;
+    }
+  }
+}
+
+.#{$css-class-prefix}text {
+  @include colorUtilities()
+}
+
+.#{$css-class-prefix}bg {
+  @include colorUtilities(background-color)
+}

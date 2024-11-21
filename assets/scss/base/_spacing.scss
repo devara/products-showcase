@@ -1,0 +1,45 @@
+@use '../abstracts/variables' as *;
+
+// .#{$css-class-prefix}m
+
+@each $marginAlias, $marginName in $spacingSides {
+  @each $space, $spaceValue in $spacings {
+    .#{$css-class-prefix}m#{$marginAlias}-#{$space} {
+      margin-#{$marginName}: $spaceValue;
+    }
+
+    @if $space!=auto {
+      .#{$css-class-prefix}p#{$marginAlias}-#{$space} {
+        padding-#{$marginName}: $spaceValue;
+      }
+    }
+  }
+}
+
+@each $space, $spaceValue in $spacings {
+  .#{$css-class-prefix}mx-#{$space} {
+    margin-left: $spaceValue;
+    margin-right: $spaceValue;
+  }
+
+  .#{$css-class-prefix}my-#{$space} {
+    margin-top: $spaceValue;
+    margin-bottom: $spaceValue;
+  }
+
+  @if $space!=auto {
+    .#{$css-class-prefix}px-#{$space} {
+      padding-left: $spaceValue;
+      padding-right: $spaceValue;
+    }
+
+    .#{$css-class-prefix}py-#{$space} {
+      padding-top: $spaceValue;
+      padding-bottom: $spaceValue;
+    }
+  } @else {
+    .#{$css-class-prefix}m-#{$space} {
+      margin: $spaceValue;
+    }
+  }
+}

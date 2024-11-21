@@ -1,0 +1,10 @@
+@use '../abstracts' as *;
+
+.#{$css-class-prefix}home {
+  &__banner {
+    height: 250px;
+    background-color: $red-light;
+    @include elementSpacing(padding, 'y', 3);
+    @include elementSpacing(padding, 'x', 4);
+  }
+}

@@ -1,0 +1,57 @@
+@use 'sass:map';
+@use './variables' as *;
+
+@mixin backgroundColor($color) {
+  background-color: $color;
+}
+
+@mixin fontWeight($weight) {
+  font-weight: $weight;
+}
+
+@mixin fontSize($alias) {
+  font-size: map.get($textSizes, $alias);
+  line-height: map.get($lineHeights, $alias);
+}
+
+@mixin textAlign($value) {
+  text-align: $value;
+}
+
+@mixin borderRadius($alias) {
+  border-radius: map.get($roundedVariants, $alias);
+}
+
+@mixin elementDisplay($value) {
+  display: $value;
+}
+
+@mixin flexDirection($value) {
+  flex-direction: $value;
+}
+
+@mixin elementSpacing($property: 'margin', $side: '', $value: auto) {
+  $propertyValue: map.get($spacings, $value);
+
+  @if (map.get($spacingSides, $side)) {
+    $sideName: map.get($spacingSides, $side);
+    #{$property}-#{$sideName}: $propertyValue;
+  } @else {
+    @if $side=='x' {
+      #{$property}-left: $propertyValue;
+      #{$property}-right: $propertyValue;
+    }
+    @if $side=='y' {
+      #{$property}-top: $propertyValue;
+      #{$property}-bottom:$propertyValue;
+    }
+  }
+}
+
+@mixin justifyContent($alias) {
+  justify-content: map.get($justifyVariants, $alias);
+}
+
+@mixin alignItems($alias) {
+  align-items: map.get($alignmentVariants, $alias);
+}
