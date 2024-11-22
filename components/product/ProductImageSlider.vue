@@ -12,12 +12,12 @@
       <button
         class="product-img-slider__prev"
         @click="toggleImageSlider('prev')">
-        prev
+        &#8249;
       </button>
       <button
         class="product-img-slider__next"
         @click="toggleImageSlider('next')">
-        next
+        &#8250;
       </button>
     </div>
     <div class="product-img-thumbnails">

@@ -2,5 +2,8 @@
 
 .#{$css-class-prefix}footer {
   min-height: 100px;
-  background-color: $blue-light;
+  background-color: $green-light;
+  @include elementDisplay(flex);
+  @include alignItems(center);
+  @include justifyContent(center);
 }

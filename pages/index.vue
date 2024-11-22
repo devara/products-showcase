@@ -1,32 +1,56 @@
 <template>
   <div class="dev-home">
-    <div class="dev-home__banner dev-flex">
-      <span class="dev-m-auto">
-        Home Banner
-      </span>
+    <div class="dev-home__banner dev-flex dev-items-center dev-justify-center">
+      <img
+        src="/images/hero-banner.svg"
+        class="">
     </div>
-    <span>
-      {{ productSearchQuery }}
-    </span>
-    <div class="products-container">
-      <ProductFilter class="dev-w-quarter" />
-      <div class="dev-w-three-quarter product-list">
+    <div class="product-filter-mobile-toggle">
+      <button @click="mobileMenu = true">
+        Show Filters
+      </button>
+    </div>
+    <div class="products-list">
+      <ProductFilter class="products-list__filter" />
+      <div class="products-list__items">
         <ProductItem
           v-for="product in products"
           :key="product.id"
           :product="product" />
       </div>
     </div>
+
+    <ClientOnly>
+      <Teleport to="body">
+        <div
+          v-if="mobileMenu"
+          class="product-filter-mobile-menu"
+          @click="closeOnBackdrop">
+          <div
+            class="product-filter-mobile-menu__body">
+            <ProductFilter @click.stop />
+          </div>
+        </div>
+      </Teleport>
+    </ClientOnly>
   </div>
 </template>
 
 <script lang="ts" setup>
 const {
   products,
-  productSearchQuery,
   productQueryParams,
 } = storeToRefs(useProductStore())
 const { getProductList } = useProductStore()
+
+const mobileMenu = ref<boolean>(false)
+
+function closeOnBackdrop () {
+  const event = new CustomEvent('close')
+
+  if (!event.defaultPrevented)
+    mobileMenu.value = false
+}
 
 async function getList () {
   try {

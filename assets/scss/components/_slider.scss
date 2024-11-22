@@ -17,6 +17,11 @@
     z-index: 10;
     top: 50%;
     transform: translateY(-50%);
+    border: none;
+    color: $white;
+    @include squareSize(50px);
+    @include backgroundColor($green-base);
+    @include fontSize(lg);
     @include borderRadius(full);
     @include elementSpacing(padding, x, 2);
     @include elementSpacing(padding, y, 2);
@@ -35,8 +40,8 @@
   @include elementDisplay(flex);
   @include justifyContent(center);
   @include alignItems(center);
-  gap: 1rem;
   @include elementSpacing(margin, t, 6);
+  gap: 1rem;
 
   &__item {
     cursor: pointer;
@@ -46,8 +51,12 @@
     @include elementSpacing(padding, y, 2);
 
     img {
+      height: 100px;
       width: auto;
-      height: 115px;
+
+      @include mq(lg) {
+        height: 115px;
+      }
     }
 
     &--active {

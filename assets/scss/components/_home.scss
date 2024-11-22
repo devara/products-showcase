@@ -2,9 +2,22 @@
 
 .#{$css-class-prefix}home {
   &__banner {
-    height: 250px;
-    background-color: $red-light;
+    height: 200px;
+    @include backgroundColor($green-light);
     @include elementSpacing(padding, 'y', 3);
     @include elementSpacing(padding, 'x', 4);
+
+    img {
+      height: 100%;
+      width: auto;
+    }
+
+    @include mq(md) {
+      height: 250px;
+    }
+
+    @include mq(lg) {
+      height: 300px;
+    }
   }
 }

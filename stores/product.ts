@@ -20,6 +20,7 @@ export const useProductStore = defineStore('product-store', () => {
     return {
       _page     : productsPagination.page,
       _limit    : productsPagination.perPage,
+      q         : productSearchQuery.value,
       brand     : productFilters.brand ?? [],
       os        : productFilters.os ?? [],
       rating_gte: productMinRating.value,

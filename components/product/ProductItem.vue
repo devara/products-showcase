@@ -14,11 +14,13 @@
 
     <div class="product__action">
       <button
-        class="dev-bg-blue-dark dev-text-white"
+        class="product__action__btn product__action__btn--cart"
         @click.stop="addToCart">
         Add cart
       </button>
-      <button @click.stop="addToWishlist">
+      <button
+        class="product__action__btn product__action__btn--wish"
+        @click.stop="addToWishlist">
         Add wishlist
       </button>
     </div>

@@ -8,6 +8,8 @@
         class="product-detail__display__view" />
 
       <div class="product-detail__display__attributes">
+        <NavigationBreadcrumb :current="product.name" />
+
         <div class="product-detail__display__attributes--item title">
           <h2>{{ product.name }}</h2>
           <span class="dev-mt-3">
@@ -16,14 +18,19 @@
         </div>
 
         <div class="product-detail__display__attributes--item dev-flex dev-items-center dev-justify-between">
-          <span class="price">
-            ${{ randomPrice }}
-          </span>
+          <div class="dev-flex dev-flex-column">
+            <span class="discount-price">
+              ${{ randomPrice }}
+            </span>
+            <span class="base-price">
+              ${{ basePrice }}
+            </span>
+          </div>
           <div class="dev-flex dev-flex-column dev-ml-6">
             <ProductRating
               :product="product"
               :rating="productRating" />
-            <p class="dev-mt-2 dev-text-sm">
+            <p class="dev-mt-2 dev-text-sm lg:dev-text-base">
               <span class="dev-text-green-base">93%</span> of buyers have recommended this.
             </p>
           </div>
@@ -76,14 +83,14 @@
 
     <div
       v-if="!product && !isLoading"
-      class="flex flex-col text-center">
-      <h3 class="block text-3xl font-bold">
+      class="product-detail__not-found">
+      <img
+        src="/images/404-not-found.svg">
+      <h3>
         Waduh, tujuanmu nggak ada!
       </h3>
       <p>Mungkin kamu salah jalan atau alamat. Ayo balik sebelum gelap!</p>
-      <NuxtLink
-        to="/"
-        class="p-3 mt-8 text-white bg-green-500 rounded-lg">
+      <NuxtLink to="/">
         Kembali
       </NuxtLink>
     </div>
@@ -110,11 +117,15 @@ const { slug }  = useRoute().params
 
 const { data } = useFetch<Product>(`/api/products/${(slug as string ?? '').split('--').at(0)}`)
 
-const randomPrice = computed<string>(() => {
+const randomPrice = computed<number>(() => {
   const decimal1 = Math.floor(Math.random() * (100 - 50 + 1) + 50)
-  const decimal2 = Math.floor(Math.random() * (99 - 1 + 1) + 1)
+  const decimal2 = Math.floor(Math.random() * (99 - 1 + 1) + 1) / 100
 
-  return `${decimal1}.${decimal2}`
+  return decimal1 + decimal2
+})
+
+const basePrice = computed<number>(() => {
+  return randomPrice.value + 2
 })
 
 const colorSelected           = ref<string>('green')
@@ -179,5 +190,5 @@ onMounted(async () => {
   }
 })
 
-useSeoMeta({ title: () => data.value?.name ?? 'Kosong' })
+useSeoMeta({ title: () => data.value?.name ?? 'Dodolane yo jelas HP' })
 </script>

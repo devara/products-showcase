@@ -14,4 +14,10 @@ export default defineNuxtConfig({
       pathGetOs      : '',
     },
   },
+  app: {
+    head: {
+      title        : 'Dodolane yo jelas HP',
+      titleTemplate: '%s - Bakul HP',
+    },
+  },
 })

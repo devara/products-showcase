@@ -1,0 +1,11 @@
+@use '../abstracts' as *;
+
+.breadcrumbs {
+  @include elementDisplay(flex);
+  @include alignItems(center);
+  gap: 1rem;
+  @include elementSpacing(padding, x, 3);
+  @include elementSpacing(padding, y, 2);
+  @include borderRadius(lg);
+  @include backgroundColor($gray-light);
+}

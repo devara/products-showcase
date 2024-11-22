@@ -6,7 +6,7 @@
         :key="n">
         <img
           :src="showStar(n - 1)"
-          class="product-rating__star">
+          class="product-rating__stars__star">
       </template>
     </span>
     <slot name="reviews">
