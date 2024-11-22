@@ -73,4 +73,24 @@ watch(productQueryParams, async () => {
 onMounted(async () => {
   await getList()
 })
+
+const {
+  getMetaTitle,
+  getMetaDescription,
+  getMetaUrl,
+  getMetaImageUrl,
+} = useAppMeta()
+
+useSeoMeta({
+  title             : () => getMetaTitle(),
+  ogTitle           : () => getMetaTitle(),
+  description       : getMetaDescription(),
+  ogDescription     : getMetaDescription(),
+  ogImage           : getMetaImageUrl(),
+  ogUrl             : getMetaUrl(),
+  twitterTitle      : () => getMetaTitle(),
+  twitterDescription: getMetaDescription(),
+  twitterImage      : getMetaImageUrl(),
+  twitterCard       : 'summary',
+})
 </script>
