@@ -4,6 +4,8 @@ import { getProducts } from '~/repository/product'
 export const useProductStore = defineStore('product-store', () => {
   const products = ref<Product[]>([])
 
+  const productsTotal = ref<number>(19)
+
   const productSearchQuery = ref<string>()
   const productMinRating   = ref<number>()
   const productOsVariants  = ref<ProductOperatingSystem[]>([])
@@ -35,6 +37,7 @@ export const useProductStore = defineStore('product-store', () => {
 
   return {
     products,
+    productsTotal,
     productsPagination,
     productSearchQuery,
     productMinRating,
