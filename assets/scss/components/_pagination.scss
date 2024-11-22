@@ -1,0 +1,19 @@
+@use '../abstracts' as *;
+
+.pagination {
+  @include elementDisplay(flex);
+  @include justifyContent(center);
+  @include elementSpacing(margin, t, 8);
+  @include elementSpacing(padding, y, 4);
+  @include elementSpacing(padding, x, 3);
+  gap: 1.5rem;
+
+  &__prev, &__next {
+    cursor: pointer;
+    color: $white;
+    @include backgroundColor($green-base);
+    @include elementSpacing(padding, y, 2);
+    @include elementSpacing(padding, x, 3);
+    border: none;
+  }
+}

@@ -20,11 +20,16 @@
     }
   }
 
-  &__items {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  &__content {
+    @include elementDisplay(flex);
+    @include flexDirection(column);
     flex-grow: 1;
+
+    &__items {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
   }
 }
 

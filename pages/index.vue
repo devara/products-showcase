@@ -12,11 +12,14 @@
     </div>
     <div class="products-list">
       <ProductFilter class="products-list__filter" />
-      <div class="products-list__items">
-        <ProductItem
-          v-for="product in products"
-          :key="product.id"
-          :product="product" />
+      <div class="products-list__content">
+        <div class="products-list__content__items">
+          <ProductItem
+            v-for="product in products"
+            :key="product.id"
+            :product="product" />
+        </div>
+        <NavigationPagination v-if="products.length > 0" />
       </div>
     </div>
 
@@ -62,6 +65,9 @@ async function getList () {
 
 watch(productQueryParams, async () => {
   await getList()
+
+  if (import.meta.client)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
 }, { deep: true })
 
 onMounted(async () => {
