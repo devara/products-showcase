@@ -29,9 +29,11 @@
 }
 
 .product-filter-mobile-toggle {
-  position: sticky;
-  top: 10px;
+  position: fixed;
+  bottom: 10px;
+  right: 0;
   z-index: 20;
+  width: 50%;
   @include elementDisplay(flex);
   @include elementSpacing(padding, x, 3);
   @include elementSpacing(padding, y, 2);

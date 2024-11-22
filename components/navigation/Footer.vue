@@ -1,5 +1,5 @@
 <template>
   <footer class="dev-footer dev-flex">
-    Footer content
+    <a href="https://storyset.com/online">Online illustrations by Storyset</a>
   </footer>
 </template>
