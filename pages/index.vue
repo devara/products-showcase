@@ -27,7 +27,7 @@
           class="product-filter-mobile-menu"
           @click="closeOnBackdrop">
           <div
-            class="dialog">
+            class="product-filter-mobile-menu__body">
             <ProductFilter @click.stop />
           </div>
         </div>

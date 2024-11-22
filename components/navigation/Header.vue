@@ -9,6 +9,7 @@
       <input
         v-model="searchQuery"
         type="text"
+        placeholder="Search"
         @keyup.enter="onEnterSearch(searchQuery)">
     </div>
   </nav>
