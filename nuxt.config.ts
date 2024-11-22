@@ -8,10 +8,14 @@ export default defineNuxtConfig({
   features         : { inlineStyles: false },
   runtimeConfig    : {
     public: {
-      apiBaseUrl     : '/api',
-      pathGetProducts: '',
-      pathGetProduct : '',
-      pathGetOs      : '',
+      apiBaseUrl      : '/api',
+      pathGetProducts : '',
+      pathGetProduct  : '',
+      pathGetOs       : '',
+      metaBaseTitle   : 'Dodolane yo jelas HP',
+      metaWebTitle    : 'Bakul HP',
+      metaDefaultImage: 'https://res.cloudinary.com/devaraeko/image/upload/v1732013475/images/products/apple-iphone-pro-11.jpg',
+      metaDefaultDesc : 'Cari hp murah tapi gak murahan? Di Bakul HP tempatnya. Aman nyaman dan terpercaya',
     },
   },
   app: {

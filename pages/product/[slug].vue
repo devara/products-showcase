@@ -103,10 +103,16 @@ import { getProducts, getProduct } from '~/repository/product'
 const {
   product,
   productRating,
-  // productBaseImage,
-  // productSale,
   productStock,
+  productBaseImage,
 } = useProductAttribute()
+const {
+  getMetaTitle,
+  getMetaDescription,
+  getMetaUrl,
+  getMetaImageUrl,
+  getMetaImageType,
+} = useAppMeta()
 
 const quantity        = ref<number>(1)
 const similarProducts = ref<Product[]>([])
@@ -190,5 +196,23 @@ onMounted(async () => {
   }
 })
 
-useSeoMeta({ title: () => data.value?.name ?? 'Dodolane yo jelas HP' })
+useSeoMeta({
+  title        : () => getMetaTitle(data.value?.name ?? product.value?.name),
+  ogTitle      : () => getMetaTitle(data.value?.name ?? product.value?.name),
+  description  : () => getMetaDescription(data.value?.name),
+  ogDescription: () => getMetaDescription(data.value?.name),
+  ogImage      : () => {
+    return {
+      url      : getMetaImageUrl(data.value?.images?.at(0) ?? productBaseImage.value),
+      secureUrl: getMetaImageUrl(data.value?.images?.at(0) ?? productBaseImage.value),
+      alt      : data.value?.name ?? product.value?.name,
+      type     : getMetaImageType(data.value?.images?.at(0) ?? productBaseImage.value),
+    }
+  },
+  ogUrl             : () => getMetaUrl('product', (route.params.slug ?? '') as string),
+  twitterTitle      : () => getMetaTitle(data.value?.name ?? product.value?.name),
+  twitterDescription: () => getMetaDescription(data.value?.name),
+  twitterImage      : () => getMetaImageUrl(data.value?.images?.at(0) ?? productBaseImage.value),
+  twitterCard       : 'summary',
+})
 </script>
